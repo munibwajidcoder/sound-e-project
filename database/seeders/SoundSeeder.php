@@ -17,11 +17,11 @@ class SoundSeeder extends Seeder
         User::create([
             'user_id'  => 'admin',
             'name'     => 'Administrator',
-            'email'    => 'admin@sound.com',
+            'email'    => 'soundadmin@gmail.com',
             'phone'    => '9000000001',
             'address'  => 'SOUND Group HQ, Mumbai',
             'role'     => 'admin',
-            'password' => Hash::make('admin123'),
+            'password' => Hash::make('admin12345'),
         ]);
 
         // 2. Create sample normal user

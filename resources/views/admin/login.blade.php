@@ -6,8 +6,8 @@
     <div style="width:100%; max-width:420px">
         <div style="text-align:center; margin-bottom:32px">
             <div style="font-size:2.5rem; margin-bottom:10px">🎵</div>
-            <h1 style="font-size:1.8rem; font-weight:900; color:#fff; margin-bottom:6px">Welcome Back</h1>
-            <p style="color:var(--text-muted)">Login to your SOUND account</p>
+            <h1 style="font-size:1.8rem; font-weight:900; color:#fff; margin-bottom:6px">Admin Login</h1>
+            <p style="color:var(--text-muted)">Secure access to SOUND Admin Panel</p>
         </div>
 
         <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px">
@@ -17,7 +17,13 @@
             </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}">
+            @if(session('success'))
+            <div class="alert" style="background:rgba(52,211,153,0.15); border:1px solid #34d399; color:#34d399; padding:12px 16px; border-radius:8px; margin-bottom:16px; font-size:0.9rem;">
+                ✅ {{ session('success') }}
+            </div>
+            @endif
+
+            <form method="POST" action="{{ route('admin.login') }}">
                 @csrf
 
                 <div class="form-group">
@@ -46,13 +52,6 @@
                 </button>
             </form>
 
-            <div style="text-align:center; margin-top:20px; padding-top:20px; border-top:1px solid var(--border)">
-                <p style="font-size:0.88rem; color:var(--text-muted)">
-                    Don't have an account?
-                    <a href="{{ route('register') }}" style="color:var(--primary-lt); font-weight:600">Register here</a>
-                </p>
-            </div>
-        </div>
 
     </div>
 </div>

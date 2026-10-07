@@ -285,7 +285,7 @@
     <div class="sidebar-footer">
         <div style="font-weight:700; color:#fff; margin-bottom:2px">{{ Auth::user()->name ?? 'Administrator' }}</div>
         <div style="font-size:0.8rem; margin-bottom:12px; word-break:break-all;">{{ Auth::user()->email ?? 'admin@sound.com' }}</div>
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="btn btn-outline btn-sm" style="width:100%; justify-content:center">Logout Account</button>
         </form>

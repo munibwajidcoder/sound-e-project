@@ -62,7 +62,15 @@ Route::middleware('auth')->group(function () {
 // ========================
 // ADMIN ROUTES
 // ========================
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+use App\Http\Controllers\Admin\AdminAuthController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // Admin Music CRUD

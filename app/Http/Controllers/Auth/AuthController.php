@@ -64,11 +64,16 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
-
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard');
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->withErrors([
+                    'email' => 'Account not found. (Admins must use the Admin portal to login)',
+                ])->withInput($request->only('email'));
             }
+
+            $request->session()->regenerate();
             return redirect('/')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
         }
 

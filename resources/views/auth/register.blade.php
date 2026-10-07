@@ -63,14 +63,20 @@
 
                 <div class="form-group">
                     <label for="password">Password <span style="color:var(--danger)">*</span></label>
-                    <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Minimum 6 characters" required>
+                    <div style="position:relative;">
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Minimum 6 characters" required>
+                        <button type="button" onclick="const p=document.getElementById('password'); p.type=p.type==='password'?'text':'password';" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1.2rem;">👁</button>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password <span style="color:var(--danger)">*</span></label>
-                    <input type="password" id="password_confirmation" name="password_confirmation"
-                        class="form-control" placeholder="Re-enter your password" required>
+                    <div style="position:relative;">
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            class="form-control" placeholder="Re-enter your password" required>
+                        <button type="button" onclick="const p=document.getElementById('password_confirmation'); p.type=p.type==='password'?'text':'password';" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1.2rem;">👁</button>
+                    </div>
                 </div>
 
                 <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:18px">

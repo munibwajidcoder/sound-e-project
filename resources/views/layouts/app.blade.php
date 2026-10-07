@@ -552,6 +552,7 @@
 <body>
 
 <!-- NAVBAR -->
+@if(!request()->routeIs('login') && !request()->routeIs('register') && !request()->routeIs('admin.login'))
 <nav class="navbar">
     <a href="{{ route('home') }}" class="navbar-brand">
         <div class="logo-icon">🎵</div>
@@ -582,6 +583,7 @@
         @endguest
     </div>
 </nav>
+@endif
 
 <!-- FLASH MESSAGES -->
 @if(session('success'))
@@ -659,6 +661,7 @@
 </style>
 
 <!-- FOOTER -->
+@if(!request()->routeIs('login') && !request()->routeIs('register') && !request()->routeIs('admin.login'))
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
@@ -702,6 +705,7 @@
         &copy; {{ date('Y') }} SOUND Entertainment Group. All rights reserved.
     </div>
 </footer>
+@endif
 
 <script>
     function openAudioModal(title, artist, url) {
