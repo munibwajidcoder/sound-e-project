@@ -246,7 +246,7 @@
             <a href="{{ route('video.show', $v->id) }}" class="media-card" style="display:block">
                 @if($v->is_new)<span class="card-badge-pos badge-new">NEW</span>@endif
                 <div class="video-thumb-wrap">
-                    <img src="/images/{{ $v->thumbnail ?? 'video_1.jpg' }}" alt="{{ $v->title }}">
+                    <img src="{{ $v->getThumbnailUrl() }}" onerror="this.onerror=null; this.src='/images/video_1.jpg';" alt="{{ $v->title }}">
                     <div class="play-overlay"><div class="play-btn-circle">▶</div></div>
                 </div>
                 <div class="card-body">

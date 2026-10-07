@@ -25,18 +25,19 @@
             border-right: 1px solid var(--border);
             position: fixed; top:0; left:0; height:100vh;
             display: flex; flex-direction: column;
-            overflow-y: auto;
+            overflow: hidden;
             backdrop-filter: blur(20px);
             z-index: 100;
         }
         .sidebar-brand {
-            padding: 24px 22px;
+            padding: 18px 20px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; gap: 12px;
+            display: flex; align-items: center; gap: 10px;
             color: #fff;
+            flex-shrink: 0;
         }
         .sidebar-brand .icon {
             width: 36px; height: 36px;
@@ -47,25 +48,26 @@
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
         }
         .sidebar-label {
-            padding: 22px 22px 8px;
-            font-size: 0.75rem;
+            padding: 14px 20px 6px;
+            font-size: 0.72rem;
             font-weight: 800;
             letter-spacing: 1.5px;
             color: var(--text-muted);
             text-transform: uppercase;
+            flex-shrink: 0;
         }
-        .sidebar-nav { list-style: none; padding: 0 14px; }
-        .sidebar-nav li { margin-bottom: 4px; }
+        .sidebar-nav { list-style: none; padding: 0 12px; flex-shrink: 0; }
+        .sidebar-nav li { margin-bottom: 2px; }
         .sidebar-nav a {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 11px 16px;
-            border-radius: 12px;
-            font-size: 0.92rem;
+            gap: 10px;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 0.88rem;
             font-weight: 600;
             color: var(--text-muted);
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
         .sidebar-nav a:hover,
         .sidebar-nav a.active {
@@ -76,11 +78,12 @@
         .sidebar-nav a .ico { font-size: 1.15rem; width: 22px; text-align: center; }
         .sidebar-footer {
             margin-top: auto;
-            padding: 20px;
+            padding: 14px 18px;
             border-top: 1px solid var(--border);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             background: rgba(18, 24, 43, 0.4);
+            flex-shrink: 0;
         }
 
         /* Main content */
@@ -89,11 +92,13 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            overflow-x: hidden;
         }
         .top-bar {
             background: rgba(10, 13, 24, 0.9);
             border-bottom: 1px solid var(--border);
-            padding: 0 36px;
+            padding: 0 24px;
             height: 72px;
             display: flex;
             align-items: center;
@@ -101,9 +106,9 @@
             position: sticky; top: 0; z-index: 90;
             backdrop-filter: blur(16px);
         }
-        .top-bar h1 { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; }
-        .top-bar-right { display:flex; align-items:center; gap:14px; }
-        .page-body { padding: 36px; flex: 1; }
+        .top-bar h1 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 800; color: #fff; }
+        .top-bar-right { display:flex; align-items:center; gap:12px; }
+        .page-body { padding: 24px; flex: 1; }
 
         /* Buttons */
         .btn {
@@ -142,15 +147,17 @@
             border: 1px solid var(--border);
             background: rgba(18, 24, 43, 0.4);
         }
-        .admin-table {
+        /* Generic table inside table-wrap (used by video/music/etc) */
+        .table-wrap table, .admin-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
+            min-width: 700px;
         }
-        .admin-table th {
+        .table-wrap table th, .admin-table th {
             text-align: left;
-            padding: 16px 20px;
-            font-size: 0.78rem;
+            padding: 14px 18px;
+            font-size: 0.76rem;
             font-weight: 800;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -159,23 +166,24 @@
             background: rgba(255, 255, 255, 0.03);
             white-space: nowrap;
         }
-        .admin-table td {
-            padding: 16px 20px;
-            font-size: 0.9rem;
+        .table-wrap table td, .admin-table td {
+            padding: 14px 18px;
+            font-size: 0.88rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text);
             vertical-align: middle;
         }
-        .admin-table tr:last-child td {
+        .table-wrap table tr:last-child td, .admin-table tr:last-child td {
             border-bottom: none;
         }
-        .admin-table tr:hover td {
+        .table-wrap table tr:hover td, .admin-table tr:hover td {
             background: rgba(99, 102, 241, 0.06);
         }
         .btn-group {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
+            flex-wrap: nowrap;
         }
         .table-img-thumb {
             width: 48px;

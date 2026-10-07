@@ -546,6 +546,60 @@
             font-size: 0.8rem;
             margin-top: 4px;
         }
+
+        /* ============================
+           RESPONSIVE — ALL SCREEN SIZES
+           ============================ */
+
+        /* Tablet (max 1024px) */
+        @media (max-width: 1024px) {
+            .navbar { padding: 0 20px; gap: 12px; }
+            .navbar-center { gap: 14px; }
+            .nav-search-wrap { width: 180px; }
+            .nav-search-wrap:focus-within { width: 220px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+            .container { padding: 0 18px; }
+        }
+
+        /* Mobile (max 768px) */
+        @media (max-width: 768px) {
+            /* Navbar — hide center nav & search on small screens */
+            .navbar { padding: 0 16px; height: 60px; }
+            .navbar-brand { font-size: 1.2rem; gap: 8px; }
+            .navbar-brand .logo-icon { width: 36px; height: 36px; font-size: 17px; }
+            .navbar-center { display: none; }
+            .nav-search-wrap { display: none; }
+            .navbar-actions { gap: 8px; }
+            .btn-sm { padding: 6px 12px; font-size: 0.78rem; }
+
+            /* Footer responsive */
+            .footer { padding: 40px 0 20px; margin-top: 50px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 24px; padding: 0 16px; }
+
+            /* Form grid stacks */
+            .form-grid-2 { grid-template-columns: 1fr; }
+
+            /* Media grid smaller */
+            .media-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+
+            /* Cards */
+            .card { padding: 16px; }
+        }
+
+        /* Small Mobile (max 480px) */
+        @media (max-width: 480px) {
+            .navbar { padding: 0 12px; height: 56px; }
+            .navbar-brand { font-size: 1.05rem; }
+
+            .footer-inner { grid-template-columns: 1fr; gap: 20px; }
+            .footer-bottom { font-size: 0.78rem; }
+
+            .media-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+            .btn { padding: 8px 16px; font-size: 0.85rem; }
+
+            .category-pill { padding: 6px 12px; font-size: 0.82rem; }
+        }
     </style>
     @stack('styles')
 </head>

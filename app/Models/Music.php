@@ -25,10 +25,21 @@ class Music extends Model
 
     public function getCoverUrl()
     {
-        if (!$this->cover_image) return asset('images/music_placeholder.jpg');
-        if (Str::startsWith($this->cover_image, 'http')) {
-            return $this->cover_image;
+        if (!$this->cover_image) return asset('images/music_1.jpg');
+        
+        $cover = $this->cover_image;
+        if (Str::startsWith($cover, 'http://') || Str::startsWith($cover, 'https://')) {
+            return $cover;
         }
-        return asset('storage/' . $this->cover_image);
+        if (Str::startsWith($cover, '/images/')) {
+            return asset($cover);
+        }
+        if (file_exists(public_path('images/' . $cover))) {
+            return asset('images/' . $cover);
+        }
+        if (file_exists(public_path($cover))) {
+            return asset($cover);
+        }
+        return asset('storage/' . $cover);
     }
 }

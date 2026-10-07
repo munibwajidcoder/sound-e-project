@@ -14,6 +14,16 @@ class VideoController extends Controller
     {
         $query = Video::query();
 
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('artist', 'like', '%' . $search . '%')
+                  ->orWhere('album', 'like', '%' . $search . '%')
+                  ->orWhere('genre', 'like', '%' . $search . '%');
+            });
+        }
+
         if ($request->filled('language')) {
             $query->where('language', $request->language);
         }
@@ -30,13 +40,17 @@ class VideoController extends Controller
             $query->where('album', 'like', '%' . $request->album . '%');
         }
 
-        $videos = $query->orderBy('created_at', 'desc')->paginate(12);
+        $videos = $query->orderBy('created_at', 'desc')->paginate(12)->withQueryString();
 
-        $genres    = Video::distinct()->pluck('genre');
-        $years     = Video::distinct()->pluck('year')->sortDesc();
-        $languages = Video::distinct()->pluck('language');
+        $genres    = Video::whereNotNull('genre')->where('genre', '!=', '')->distinct()->pluck('genre');
+        $years     = Video::whereNotNull('year')->where('year', '!=', '')->distinct()->pluck('year')->sortDesc();
+        $languages = Video::whereNotNull('language')->where('language', '!=', '')->distinct()->pluck('language');
 
-        return view('video.index', compact('videos', 'genres', 'years', 'languages'));
+        $totalVideos = Video::count();
+        $totalViews  = Video::sum('views');
+        $featuredVideo = Video::orderBy('views', 'desc')->first();
+
+        return view('video.index', compact('videos', 'genres', 'years', 'languages', 'totalVideos', 'totalViews', 'featuredVideo'));
     }
 
     // Single video detail
