@@ -311,18 +311,42 @@
         <div class="hero-search-wrap">
             <form action="{{ route('search') }}" method="GET" class="hero-search-form">
                 <input type="text" name="q" placeholder="Search by Song Title, Artist, Album, Genre..." value="{{ request('q') }}">
-                <button type="submit" class="btn btn-primary">Explore &#x1F680;</button>
+                <button type="submit" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
+                    <span>Explore</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
             </form>
         </div>
 
         <!-- Quick Filter Pills -->
         <div class="hero-pills">
-            <a href="{{ route('music.index') }}?genre=Qawwali" class="category-pill">&#x1F3B5; Qawwali</a>
-            <a href="{{ route('music.index') }}?genre=Hip-Hop"  class="category-pill">&#x1F525; Hip-Hop</a>
-            <a href="{{ route('music.index') }}?genre=Romantic" class="category-pill">&#x2764; Romantic</a>
-            <a href="{{ route('music.index') }}?genre=Pop"      class="category-pill">&#x1F3B6; Pop</a>
-            <a href="{{ route('albums.index') }}"               class="category-pill">&#x1F4BF; Albums</a>
-            <a href="{{ route('video.index') }}"                class="category-pill">&#x1F3AC; 4K Videos</a>
+            <a href="{{ route('music.index') }}?genre=Qawwali" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#a5b4fc;"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <span>Qawwali</span>
+            </a>
+            <a href="{{ route('music.index') }}?genre=Hip-Hop" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#f59e0b;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"></path></svg>
+                <span>Hip-Hop</span>
+            </a>
+            <a href="{{ route('music.index') }}?genre=Romantic" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#ec4899;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Romantic</span>
+            </a>
+            <a href="{{ route('music.index') }}?genre=Pop" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                <span>Pop</span>
+            </a>
+            <a href="{{ route('albums.index') }}" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#c084fc;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+                <span>Albums</span>
+            </a>
+            <a href="{{ route('video.index') }}" class="category-pill">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#34d399;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                <span>4K Videos</span>
+            </a>
         </div>
 
     </div>

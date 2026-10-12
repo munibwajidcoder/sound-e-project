@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SOUND Entertainment') - SOUND Group</title>
     <meta name="description" content="@yield('meta_description', 'SOUND Entertainment - Your premier destination for Regional and English Music and Videos.')">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v={{ time() }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v={{ time() }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v={{ time() }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}?v={{ time() }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -69,25 +76,20 @@
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: #fff;
-            letter-spacing: -0.5px;
+            gap: 0;
+            text-decoration: none;
         }
-        .navbar-brand .logo-icon {
-            width: 42px; height: 42px;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-            animation: pulse-glow 3s infinite alternate;
+        .navbar-brand .logo-img {
+            height: 46px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+            transition: filter 0.3s ease, transform 0.3s ease;
         }
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.5); }
-            100% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.7); }
+        .navbar-brand:hover .logo-img {
+            filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7));
+            transform: scale(1.04);
         }
 
         .navbar-center {
@@ -147,10 +149,16 @@
         }
         .nav-search-icon {
             position: absolute;
-            left: 12px;
-            font-size: 14px;
+            left: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #94a3b8;
             pointer-events: none;
+            transition: color 0.25s ease;
+        }
+        .nav-search-wrap:focus-within .nav-search-icon {
+            color: var(--primary-lt);
         }
 
         .navbar-actions { display: flex; align-items: center; gap: 12px; }
@@ -236,6 +244,7 @@
         .category-pill {
             display: inline-flex;
             align-items: center;
+            gap: 8px;
             padding: 8px 18px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -244,6 +253,13 @@
             font-size: 0.88rem;
             font-weight: 600;
             transition: all 0.25s ease;
+        }
+        .category-pill svg {
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .category-pill:hover svg {
+            transform: scale(1.15);
         }
         .category-pill:hover,
         .category-pill.active {
@@ -609,8 +625,7 @@
 @if(!request()->routeIs('login') && !request()->routeIs('register') && !request()->routeIs('admin.login'))
 <nav class="navbar">
     <a href="{{ route('home') }}" class="navbar-brand">
-        <div class="logo-icon">🎵</div>
-        SOUND
+        <img src="{{ asset('images/logo.png') }}" alt="SOUND Entertainment" class="logo-img">
     </a>
 
     <div class="navbar-center">
@@ -623,7 +638,12 @@
 
         <!-- Live Nav Search Bar -->
         <form method="GET" action="{{ route('search') }}" class="nav-search-wrap">
-            <span class="nav-search-icon">🔍</span>
+            <span class="nav-search-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Search music, artist..." class="nav-search-input">
         </form>
     </div>
@@ -633,7 +653,13 @@
             <a href="{{ route('login') }}" class="btn btn-outline">Login</a>
             <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
         @else
-            <a href="{{ route('profile') }}" class="btn btn-primary" style="border-radius:50px;">👤 {{ Auth::user()->name }}</a>
+            <a href="{{ route('profile') }}" class="btn btn-primary" style="border-radius:50px; display:inline-flex; align-items:center; gap:8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>{{ Auth::user()->name }}</span>
+            </a>
         @endguest
     </div>
 </nav>
@@ -719,11 +745,10 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-brand">
-            <div class="navbar-brand">
-                <div class="logo-icon">🎵</div>
-                SOUND Entertainment
-            </div>
-            <p>Your premier destination for Regional (Tamil, Telugu, Hindi, Malayalam, Punjabi, Bengali) and English Music & Videos. Experience high fidelity audio and cinema without boundaries.</p>
+            <a href="{{ route('home') }}" class="navbar-brand" style="display:inline-block; margin-bottom:14px;">
+                <img src="{{ asset('images/logo.png') }}" alt="SOUND Entertainment" class="logo-img" style="height:52px;">
+            </a>
+            <p>Your premier destination for Regional (Tamil, Telugu, Hindi, Malayalam, Punjabi, Bengali) and English Music &amp; Videos. Experience high fidelity audio and cinema without boundaries.</p>
         </div>
         <div>
             <h4>Browse</h4>
