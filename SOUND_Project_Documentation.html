@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOUND - eProject Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1e293b;
+            background: #f8fafc;
+            line-height: 1.45;
+            font-size: 12px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .page {
+            background: #ffffff;
+            width: 100%;
+            max-width: 210mm;
+            min-height: 275mm;
+            margin: 0 auto;
+            padding: 16mm 18mm;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .page-break {
+            page-break-after: always;
+            break-after: page;
+        }
+        
+        /* Floating Print Bar (hidden in print) */
+        .no-print-bar {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 9999;
+            background: #0f172a;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .no-print-bar button {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: #fff;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        @media print {
+            .no-print-bar { display: none !important; }
+            body { background: #fff; }
+            .page { padding: 0; max-width: none; min-height: auto; margin: 0; }
+        }
+
+        /* Header / Brand */
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        .brand-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+        .brand-title span { color: #6366f1; }
+        .doc-badge {
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #c7d2fe;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Meta Box */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 11.5px;
+        }
+        .meta-item strong { color: #0f172a; }
+        .meta-item span { color: #475569; }
+
+        /* Section Headings */
+        h2.section-heading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f172a;
+            border-left: 4px solid #6366f1;
+            padding-left: 8px;
+            margin: 12px 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        p.desc {
+            color: #334155;
+            font-size: 11.5px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 9px 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+        .card h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e1b4b;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .card p {
+            font-size: 11px;
+            color: #475569;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Highlights bullet box */
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 3px solid #3b82f6;
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 10px;
+            font-size: 11px;
+            color: #1e3a8a;
+        }
+        .highlight-box ul {
+            padding-left: 16px;
+            margin: 0;
+        }
+        .highlight-box li { margin-bottom: 2px; }
+
+        /* Tables */
+        table.doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        table.doc-table th {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 6px 8px;
+            border: 1px solid #cbd5e1;
+        }
+        table.doc-table td {
+            padding: 5px 8px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        table.doc-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        /* Badge tags */
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .badge-user { background: #dbeafe; color: #1d4ed8; }
+        .badge-admin { background: #fce7f3; color: #be185d; }
+        .badge-success { background: #dcfce7; color: #15803d; }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 10px;
+            color: #94a3b8;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FLOATING PDF DOWNLOAD / PRINT BAR -->
+    <div class="no-print-bar">
+        <span>📄 2-Page Official Documentation Ready</span>
+        <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+
+    <!-- ================= PAGE 1 ================= -->
+    <div class="page page-break">
+        <div class="doc-header">
+            <div>
+                <div class="brand-title">SOUND <span>Entertainment</span></div>
+                <div style="font-size: 11px; color:#64748b; font-weight:600;">Aptech eProject Specification & Technical Documentation</div>
+            </div>
+            <div class="doc-badge">Project Document • Page 1 of 2</div>
+        </div>
+
+        <!-- Project Meta Details -->
+        <div class="meta-grid">
+            <div class="meta-item">
+                <strong>Project Title:</strong> <span>SOUND (Regional & English Music & Video Portal)</span><br>
+                <strong>Tech Stack:</strong> <span>Laravel 11, PHP 8.2+, MySQL, Blade Engine, CSS3</span><br>
+                <strong>Centre:</strong> <span>[ _____________________________________ ]</span>
+            </div>
+            <div class="meta-item">
+                <strong>Batch Code:</strong> <span>[ _________________ ]</span> &nbsp;|&nbsp; <strong>Group:</strong> <span>[ ________ ]</span><br>
+                <strong>Team Members:</strong> <span>Muhammad Moheeb, Muhammad Muneeb, Muhammad Burhan</span><br>
+                <strong>Submission Date:</strong> <span>[ _________________ ]</span>
+            </div>
+        </div>
+
+        <!-- Section: Overview -->
+        <h2 class="section-heading">1. Project Overview & Problem Statement</h2>
+        <p class="desc">
+            <strong>SOUND</strong> is an integrated web-based entertainment portal developed for <strong>SOUND Group</strong> to organize and stream Regional (Tamil, Telugu, Hindi, Malayalam, Punjabi, Bengali) and English audio and video entertainment. The platform addresses fragmented media browsing by providing centralized categorization (Artist, Album, Year, Genre, Language), dynamic search, and community review ratings.
+        </p>
+
+        <!-- Section: User / Client Side Features -->
+        <h2 class="section-heading">2. User / Client-Side Portal (Functional Walkthrough)</h2>
+        <div class="feature-grid">
+            <div class="card">
+                <h3>🎵 Music & Album Showcase</h3>
+                <p>Users can browse organized song catalogs, studio albums (e.g. <em>Glory</em>, <em>Desi Kalakaar</em>, <em>Coke Studio</em>), and filter instantly by language and genre.</p>
+            </div>
+            <div class="card">
+                <h3>🎬 4K Video Catalog</h3>
+                <p>High-definition video tracks and concert recordings with responsive embed playback, thumbnail posters, and duration tags.</p>
+            </div>
+            <div class="card">
+                <h3>🔍 Instant Search & Quick Filter Pills</h3>
+                <p>Global search bar querying titles, artists, and albums in real time, accompanied by single-click category pills (Qawwali, Hip-Hop, Pop, Romantic).</p>
+            </div>
+            <div class="card">
+                <h3>🎧 In-Browser Audio Modal Player</h3>
+                <p>Non-intrusive floating glassmorphism audio player with animated equalizer bars that streams songs smoothly without interrupting page browsing.</p>
+            </div>
+            <div class="card">
+                <h3>⭐ Reviews & 5-Star Ratings</h3>
+                <p>Registered users can post verified reviews and 1-to-5 star ratings, allowing dynamic average rating calculation per song/video.</p>
+            </div>
+            <div class="card">
+                <h3>✨ Flash "NEW" Badge Indicator</h3>
+                <p>As per client specifications, freshly added music and video tracks automatically display an animated glowing "NEW" badge.</p>
+            </div>
+        </div>
+
+        <!-- Section: Homepage 5-5 Listing Specification -->
+        <div class="highlight-box">
+            <strong>📌 Aptech Specification Compliance (Home Page Layout):</strong>
+            <ul>
+                <li><strong>Home Showcase:</strong> Features Hero branding, live search bar, and curated categories.</li>
+                <li><strong>Latest 5-5 Listing:</strong> Home page displays exactly the latest 5 music tracks and latest 5 video tracks dynamically fetched from MySQL database.</li>
+                <li><strong>Responsive 3D Glass Theme:</strong> Fully responsive interface optimized for desktop, tablet, and mobile displays without horizontal scrollbars.</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">SOUND eProject Documentation • Developed by Muhammad Moheeb, Muhammad Muneeb, Muhammad Burhan • Page 1</div>
+    </div>
+
+    <!-- ================= PAGE 2 ================= -->
+    <div class="page">
+        <div class="doc-header">
+            <div>
+                <div class="brand-title">SOUND <span>Entertainment</span></div>
+                <div style="font-size: 11px; color:#64748b; font-weight:600;">Admin Management, Database & Setup Guidelines</div>
+            </div>
+            <div class="doc-badge">Project Document • Page 2 of 2</div>
+        </div>
+
+        <!-- Section: Admin Portal -->
+        <h2 class="section-heading">3. Administrator Control Portal (Management Side)</h2>
+        <p class="desc">
+            The Admin Panel is a dedicated, protected dashboard accessible solely to administrators for complete site management:
+        </p>
+        <div class="feature-grid">
+            <div class="card">
+                <h3>📊 Administrative Dashboard</h3>
+                <p>Displays real-time analytics including total music count, total video count, active user count, and recent reviews submitted.</p>
+            </div>
+            <div class="card">
+                <h3>🎶 Music Management (CRUD)</h3>
+                <p>Add new tracks with cover images, audio stream links, duration, artist, album, genre, language, and release year; edit and delete tracks.</p>
+            </div>
+            <div class="card">
+                <h3>📹 Video Management (CRUD)</h3>
+                <p>Create and update video entries with thumbnail covers, streaming URLs (YouTube/MP4), genres, languages, and delete outdated media.</p>
+            </div>
+            <div class="card">
+                <h3>🏷️ Category & User Administration</h3>
+                <p>Create and manage taxonomy categories (Genres, Artists, Albums, Years) and moderate registered user accounts and inappropriate reviews.</p>
+            </div>
+        </div>
+
+        <!-- Section: Database Schema -->
+        <h2 class="section-heading">4. Relational Database Schema Summary (`sound_db`)</h2>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th style="width:18%;">Table Name</th>
+                    <th style="width:28%;">Primary Key & Foreign Keys</th>
+                    <th style="width:54%;">Key Fields & Functional Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>users</strong></td>
+                    <td><code>id (PK)</code></td>
+                    <td><code>name, email, password, phone, address, role ('admin'/'user')</code> — User authentication & profiles.</td>
+                </tr>
+                <tr>
+                    <td><strong>categories</strong></td>
+                    <td><code>id (PK)</code></td>
+                    <td><code>name, slug, type ('genre'/'language'/'year')</code> — Taxonomy categorization.</td>
+                </tr>
+                <tr>
+                    <td><strong>music</strong></td>
+                    <td><code>id (PK)</code></td>
+                    <td><code>title, artist, album, genre, language, year, audio_url, cover_image, is_new</code> — Song catalog.</td>
+                </tr>
+                <tr>
+                    <td><strong>videos</strong></td>
+                    <td><code>id (PK)</code></td>
+                    <td><code>title, artist, album, genre, language, year, video_url, thumbnail, is_new</code> — 4K video catalog.</td>
+                </tr>
+                <tr>
+                    <td><strong>reviews</strong></td>
+                    <td><code>id (PK)</code>, <code>user_id, music_id, video_id (FK)</code></td>
+                    <td><code>rating (1 to 5), comment, created_at</code> — User feedback and rating calculations.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section: Default Credentials & Installation -->
+        <h2 class="section-heading">5. Default Credentials & Local Setup Instructions</h2>
+        <div class="feature-grid">
+            <div class="card">
+                <h3>🔐 Default Credentials</h3>
+                <p style="font-size:11px; line-height:1.6;">
+                    <strong>Admin URL:</strong> <code>/admin/login</code><br>
+                    <strong>Admin Email:</strong> <code>admin@sound.com</code> | <strong>Pass:</strong> <code>password123</code><br>
+                    <strong>Member User:</strong> <code>moheeb@sound.com</code> | <strong>Pass:</strong> <code>password123</code><br>
+                    <strong>Database:</strong> <code>sound_db</code> (MySQL, Port 3306)
+                </p>
+            </div>
+            <div class="card">
+                <h3>⚙️ 3-Step Local Execution</h3>
+                <p style="font-size:11px; line-height:1.6;">
+                    <strong>1. Environment:</strong> Copy <code>.env.example</code> to <code>.env</code> & run <code>php artisan key:generate</code><br>
+                    <strong>2. Migrate & Seed:</strong> Run <code>php artisan migrate --seed</code><br>
+                    <strong>3. Serve:</strong> Run <code>php artisan serve</code> &rarr; open <code>http://127.0.0.1:8000</code>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section: Summary Note -->
+        <div class="highlight-box" style="margin-top: 8px;">
+            <strong>✅ eProject Submission Checklist:</strong> Source code verified, MySQL database seeders aligned with SOUND specification, transparent favicons and logos integrated, and responsive multi-browser testing passed.
+        </div>
+
+        <div class="footer-note">SOUND eProject Documentation • Developed by Muhammad Moheeb, Muhammad Muneeb, Muhammad Burhan • Page 2</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+.git
+.github
+.agents
+.agent
+.gemini
+.gsd
+node_modules
+tests
+storage/logs/*
+SOUND.doc
